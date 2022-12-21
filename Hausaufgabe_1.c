@@ -1,48 +1,59 @@
 #include <stdio.h>
 #include<stdlib.h>
 #include<math.h>
-#include "tr.h"
 
-struct complex{
-    double real;
-    double img;
-}
- main(){
-    struct complex num1,num2,result;
+int main(void){
+    char eingabe_1[22];
+    char *ptr;
     char opt;
-    // double num1;
-    // double num2;
-    // double result;
+    double result_real, result_img;
 
     printf("Please enter an operator: \n");
     scanf ("%c",&opt);
 
     printf("Please enter your first number: \n");
-    scanf("%lf%lf",&num1.real,&num1.img);
+    scanf("%s",&eingabe_1);
 
-    printf("Please enter your second number: \n");
-    scanf("%lf%lf",&num2.real,&num2.img);
-    double wonder();
+    double num1_real= strtod(eingabe_1,&ptr);
+    printf("Real number: %f:\n",num1_real);
+
+    double num1_img = strtod(ptr, NULL);
+    printf("Imganary number: %f\n", num1_img);
+
+
+    char eingabe_2[22];
+    char *str;
+
+    printf("\nPlease enter your first number: \n");
+    scanf("%s",&eingabe_2);
+
+    double num2_real= strtod(eingabe_2,&str);
+    printf("Real number: %f:\n",num2_real);
+
+    double num2_img = strtod(str, NULL);
+    printf("Imganary number: %f\n", num2_img);
+
+
     switch (opt){
     case '+':
-        result.real= num1.real+num2.real;
-        result.img= num1.img+num2.img;
-        printf("The result: %lf+i%lf", result.real,result.img);
+        result_real= num1_real+num2_real;
+        result_img= num1_img+num2_img;
+        printf("The result: %lf+i%lf", result_real,result_img);
         break;
     case '-':
-        result.real= num1.real-num2.real;
-        result.img= num1.img-num2.img;
-        printf("The result: %lf+i%lf", result.real,result.img);
+        result_real= num1_real-num2_real;
+        result_img= num1_img-num2_img;
+        printf("The result: %lf+i%lf", result_real,result_img);
         break;
     case '*':
-        result.real= (num1.real*num2.real-num1.img*num2.img);
-        result.img= (num1.real*num2.img+num1.img*num2.real);
-        printf("The result: %lf+i%lf", result.real,result.img);
+        result_real= (num1_real*num2_real-num1_img*num2_img);
+        result_img= (num1_real*num2_img+num1_img*num2_real);
+        printf("The result: %lf+i%lf", result_real,result_img);
         break;
     case '/':
-        result.real= (num1.real*num2.real+num1.img*num2.img)/(num2.real*num2.real+num2.img*num2.img);
-        result.img= (num1.img/num2.real-num1.real*num2.img)/(num2.real*num2.real+num2.img*num2.img);
-        printf("The result: %lf+i%lf", result.real,result.img);
+        result_real= (num1_real*num2_real+num1_img*num2_img)/(num2_real*num2_real+num2_img*num2_img);
+        result_img= (num1_img/num2_real-num1_real*num2_img)/(num2_real*num2_real+num2_img*num2_img);
+        printf("The result: %lf+i%lf", result_real,result_img);
         break;
     
     default:
@@ -50,38 +61,39 @@ struct complex{
         break;
     }
 
-    char format;
-    printf("If you want to change the format, please enter one (k,p,e):");
-    scanf("%c",&format);
-    double radius;
-    radius=sqrt(result.real*result.real+result.img);
-    double w;
-    w= 1/ tan(result.img/result.real);
-    double theo;
-    theo=cos(w);
-    double leo;
-    leo= sin(w);
-    double mia;
-    mia= cos(w);
-    double nina;
-    nina= sin(w);
-    double maya= mia+nina;
-    double exp(double maya);
+    char fot;
+    printf("\nPlease enter your prefered format (k,p,e): \n");
+    scanf(" %c",&fot);
+ 
+     double radius;
+     radius=sqrt(result_real*result_real+result_img+result_img);
+     double winkel;
+     winkel= 1/ tan(result_img/result_real);
 
-    switch (format)
-    {
-     case 'k':
-        printf("The result is:\n %d%d",&result.real,&result.img);        
-        break;
-    case 'p':
-        printf("The result is: \n %d*(%d+i%d)",&radius,&theo,&leo);
-        break;
-    case 'e':
-        printf("The result is: \n %d*%d",&radius,&exp);
-        break;
-    default:
-        printf("Thank you, have a nice day!");
-        break;
-    }
+     double theo;
+     theo=cos(winkel);
 
+     double leo;
+     leo= sin(winkel);
+
+     double maya= theo+leo;
+     double exp(double maya);
+    
+
+     switch (fot)
+     {
+      case 'k':
+         printf("The result: %lf+i%lf", result_real,result_img);     
+         break;
+     case 'p':
+         printf("The result is: \n %lf*(%lf+i%lf)",radius,theo,leo);
+         break;
+     case 'e':
+         printf("The result is: \n %lf*%lf",radius,exp);
+         break;
+     default:
+         printf("Thank you, have a nice day!");
+         break;
+     }
 }
+
